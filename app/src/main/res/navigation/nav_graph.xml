@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/screenSaverFragment">
+
+    <fragment
+        android:id="@+id/screenSaverFragment"
+        android:name="com.example.hackathonapp.ui.fragment.ScreenSaverFragment"
+        android:label="screen_saver_fragment"
+        tools:layout="@layout/screen_saver_fragment" >
+        <action
+            app:popUpTo="@+id/screenSaverFragment"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_screenSaverFragment_to_channelsFragment"
+            app:destination="@id/channelsFragment" />
+        <action
+            app:popUpTo="@+id/screenSaverFragment"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_screenSaverFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.hackathonapp.ui.fragment.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" />
+    <fragment
+        android:id="@+id/channelsFragment"
+        android:name="com.example.hackathonapp.ui.fragment.ChannelsFragment"
+        android:label="channels_fragment"
+        tools:layout="@layout/channels_fragment" >
+        <action
+            android:id="@+id/action_channelsFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.example.hackathonapp.ui.fragment.PlayerFragment"
+        android:label="player_fragment"
+        tools:layout="@layout/player_fragment" />
+</navigation>
