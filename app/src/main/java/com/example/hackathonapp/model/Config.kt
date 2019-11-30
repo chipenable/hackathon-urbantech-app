@@ -5,5 +5,6 @@ package com.example.hackathonapp.model
  */
 class Config(
     val baseUrl: String,
-    val cacheUrls: List<String>
+    val cacheUrls: List<String>,
+    val playlistUrl: String
 )

@@ -35,12 +35,12 @@ class ScreenSaverFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, factory).get(ScreenSaverViewModel::class.java)
 
         viewModel.isAuthorized.observe(this, Observer {
-            if (!it){
+            /*if (!it){
                 findNavController().navigate(R.id.action_screenSaverFragment_to_loginFragment)
             }
             else{
                 findNavController().navigate(R.id.action_screenSaverFragment_to_channelsFragment)
-            }
+            }*/
         })
 
         viewModel.checkSession()

@@ -1,7 +1,8 @@
-package com.example.hackathonapp.model
+package com.example.hackathonapp.model.account
 
 import android.util.Log
 import com.example.hackathonapp.data.IAccountApi
+import com.example.hackathonapp.model.session.SessionStore
 import io.reactivex.Observable
 import ru.chipenable.hackathonvideoapp.model.util.RxSchedulers
 import java.util.concurrent.TimeUnit
@@ -22,12 +23,15 @@ interface IAccountInteractor {
 
     fun signIn(login: String, password: String): Observable<AuthResult>
 
-    fun checkSession()
+    fun checkSession(): Observable<Boolean>
+
+    fun logout(): Observable<Boolean>
 
 }
 
 class AccountInteractor(val sessionStore: SessionStore, val accountApi: IAccountApi,
-                        val schedulers: RxSchedulers): IAccountInteractor {
+                        val schedulers: RxSchedulers):
+    IAccountInteractor {
 
     companion object{
         val TAG = AccountInteractor::class.java.name
@@ -41,8 +45,7 @@ class AccountInteractor(val sessionStore: SessionStore, val accountApi: IAccount
             if (response.isSuccessful){
                 Log.d(TAG, "success: ${response.body()}")
                 val account = response.body()!!
-                sessionStore.session = account.session
-                sessionStore.userId = account.id
+                sessionStore.saveSession(account.session, account.id)
                 AuthResult.Success()
             }
             else {
@@ -57,24 +60,31 @@ class AccountInteractor(val sessionStore: SessionStore, val accountApi: IAccount
             .concatMap { loginObs }
 
 
-        val processingObs: Observable<AuthResult> = Observable.just(AuthResult.Processing())
+        val processingObs: Observable<AuthResult> = Observable.just(
+            AuthResult.Processing()
+        )
 
         return delayLoginObs.startWith(processingObs)
             .compose(schedulers.fromIoToUiSchedulersObs())
     }
 
-    override fun checkSession(){
+    override fun checkSession(): Observable<Boolean> {
 
-
-
-        val accountObs = Observable.fromCallable {
-            accountApi.account(sessionStore.session, sessionStore.userId).execute()
+        return Observable.fromCallable {
+            accountApi.account().execute()
         }.map {response ->
-            Log.d(TAG, "response: ${response.headers()}")
-            response
+            Log.d(TAG, "response: ${response.body()}")
+            response.isSuccessful
         }
             .compose(schedulers.fromIoToUiSchedulersObs())
-            .subscribe()
 
+    }
+
+    override fun logout(): Observable<Boolean> {
+        return Observable.fromCallable {
+            sessionStore.clearSession()
+            false
+        }
+            .compose(schedulers.fromIoToUiSchedulersObs())
     }
 }

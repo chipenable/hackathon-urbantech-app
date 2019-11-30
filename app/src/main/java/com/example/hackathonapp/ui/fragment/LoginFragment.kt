@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 
 import com.example.hackathonapp.R
-import com.example.hackathonapp.model.AuthResult
+import com.example.hackathonapp.model.account.AuthResult
 import com.example.hackathonapp.ui.common.mainComponent
 import com.example.hackathonapp.viewmodel.LoginVMFactory
 import com.example.hackathonapp.viewmodel.LoginViewModel

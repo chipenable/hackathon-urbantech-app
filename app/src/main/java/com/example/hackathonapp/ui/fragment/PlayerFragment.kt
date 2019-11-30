@@ -31,7 +31,8 @@ class PlayerFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val factory = PlayerVMFactory(mainComponent)
         viewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel::class.java)
-        // TODO: Use the ViewModel
+
+
     }
 
 }

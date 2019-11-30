@@ -1,6 +1,6 @@
 package com.example.hackathonapp.data
 
-import com.example.hackathonapp.model.Account
+import com.example.hackathonapp.model.account.Account
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -14,6 +14,6 @@ interface IAccountApi {
     fun login(@Field("name") login: String, @Field("password") password: String): Call<Account>
 
     @GET("/account")
-    fun account(@Header("session") session: String, @Header("userId") userId: String): Call<Object>
+    fun account(): Call<Object>
 
 }

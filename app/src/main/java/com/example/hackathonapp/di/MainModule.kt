@@ -1,27 +1,34 @@
 package com.example.hackathonapp.di
 
+import android.app.Activity
+import android.content.Context
 import com.example.hackathonapp.data.IAccountApi
-import com.example.hackathonapp.model.AccountInteractor
-import com.example.hackathonapp.model.Config
-import com.example.hackathonapp.model.IAccountInteractor
-import com.example.hackathonapp.model.SessionStore
+import com.example.hackathonapp.model.*
+import com.example.hackathonapp.model.account.AccountInteractor
+import com.example.hackathonapp.model.account.IAccountInteractor
+import com.example.hackathonapp.model.session.SessionInterceptor
+import com.example.hackathonapp.model.session.SessionStore
 import dagger.Module
 import dagger.Provides
-import okhttp3.Interceptor
-import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.chipenable.hackathonvideoapp.model.util.RxSchedulers
-import java.net.CookieManager
-import java.net.CookiePolicy
 import javax.inject.Singleton
 
 /**
  * Created by Pavel.B on 30.11.2019.
  */
 @Module
-class MainModule {
+class MainModule(val context: Context) {
+
+    @Singleton
+    @Provides
+    fun provideContext(): Context{
+        return context
+    }
+
 
     @Singleton
     @Provides
@@ -38,20 +45,25 @@ class MainModule {
             "$baseUrl:8080/cache_id",
             "$baseUrl:8081/cache_id"
         )
+        val playlistUrl = "$baseUrl/playlist"
 
-        return Config(baseUrl, cacheUrls)
+        return Config(baseUrl, cacheUrls, playlistUrl)
     }
 
     @Singleton
     @Provides
-    fun provideClient(): OkHttpClient {
+    fun provideClient(sessionStore: SessionStore): OkHttpClient {
         val client = OkHttpClient.Builder()
 
-        val logger: Interceptor =
+        val authInterceptor =
+            SessionInterceptor(
+                sessionStore
+            )
+        client.addInterceptor(authInterceptor)
 
-        /*val cookieManager = CookieManager()
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL)
-        client.cookieJar(JavaNetCookieJar(cookieManager))*/
+        val logger = HttpLoggingInterceptor()
+        logger.level = HttpLoggingInterceptor.Level.BODY
+        client.addInterceptor(logger)
 
         return client.build()
     }
@@ -74,14 +86,19 @@ class MainModule {
 
     @Singleton
     @Provides
-    fun provideSessionStore(): SessionStore {
-        return SessionStore()
+    fun provideSessionStore(context: Context): SessionStore {
+        val pref = context.getSharedPreferences("session", Activity.MODE_PRIVATE)
+        return SessionStore(pref)
     }
 
     @Singleton
     @Provides
     fun provideAccountInteractor(sessionStore: SessionStore, accountApi: IAccountApi,
                                  schedulers: RxSchedulers): IAccountInteractor {
-        return AccountInteractor(sessionStore, accountApi, schedulers)
+        return AccountInteractor(
+            sessionStore,
+            accountApi,
+            schedulers
+        )
     }
 }

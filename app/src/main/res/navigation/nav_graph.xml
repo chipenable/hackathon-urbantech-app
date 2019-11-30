@@ -3,24 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/screenSaverFragment">
-
-    <fragment
-        android:id="@+id/screenSaverFragment"
-        android:name="com.example.hackathonapp.ui.fragment.ScreenSaverFragment"
-        android:label="screen_saver_fragment"
-        tools:layout="@layout/screen_saver_fragment" >
-        <action
-            app:popUpTo="@+id/screenSaverFragment"
-            app:popUpToInclusive="true"
-            android:id="@+id/action_screenSaverFragment_to_channelsFragment"
-            app:destination="@id/channelsFragment" />
-        <action
-            app:popUpTo="@+id/screenSaverFragment"
-            app:popUpToInclusive="true"
-            android:id="@+id/action_screenSaverFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+    app:startDestination="@id/channelsFragment">
 
     <fragment
         android:id="@+id/loginFragment"

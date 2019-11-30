@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">HackathonApp</string>
-    <string name="loginHint">name</string>
-    <string name="passwordHint">password</string>
-    <string name="sign_in">sign in</string>
+    <string name="loginHint">логин</string>
+    <string name="passwordHint">пароль</string>
+    <string name="sign_in">Войти</string>
+    <string name="loginMenuTitle">Войти</string>
+    <string name="logoutMenuTitle">Выйти</string>
 </resources>

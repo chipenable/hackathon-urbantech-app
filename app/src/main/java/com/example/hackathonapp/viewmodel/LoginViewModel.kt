@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.hackathonapp.di.MainComponent
-import com.example.hackathonapp.model.AuthResult
-import com.example.hackathonapp.model.IAccountInteractor
+import com.example.hackathonapp.model.account.AuthResult
+import com.example.hackathonapp.model.account.IAccountInteractor
 import com.example.hackathonapp.model.util.SingleLiveEvent
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject

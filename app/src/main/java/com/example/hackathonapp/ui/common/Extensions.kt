@@ -1,5 +1,6 @@
 package com.example.hackathonapp.ui.common
 
+import android.util.DisplayMetrics.DENSITY_DEFAULT
 import androidx.fragment.app.Fragment
 import com.example.hackathonapp.App
 import com.example.hackathonapp.di.MainComponent
@@ -10,3 +11,6 @@ import com.example.hackathonapp.di.MainComponent
 
 val Fragment.mainComponent: MainComponent
 get() = (context!!.applicationContext as App).mainComponent
+
+fun Fragment.dpToPx(dp: Int)
+        = (dp * resources.displayMetrics.densityDpi.toFloat()/ DENSITY_DEFAULT.toFloat()).toInt()
