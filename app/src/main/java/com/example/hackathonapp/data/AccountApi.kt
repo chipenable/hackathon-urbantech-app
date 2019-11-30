@@ -14,6 +14,6 @@ interface IAccountApi {
     fun login(@Field("name") login: String, @Field("password") password: String): Call<Account>
 
     @GET("/account")
-    fun account(): Call<Object>
+    fun account(): Call<Account>
 
 }

@@ -3,9 +3,12 @@ package com.example.hackathonapp.di
 import android.app.Activity
 import android.content.Context
 import com.example.hackathonapp.data.IAccountApi
+import com.example.hackathonapp.data.IChannelsApi
 import com.example.hackathonapp.model.*
 import com.example.hackathonapp.model.account.AccountInteractor
 import com.example.hackathonapp.model.account.IAccountInteractor
+import com.example.hackathonapp.model.channels.ChannelsInteractor
+import com.example.hackathonapp.model.channels.IChannelsInteractor
 import com.example.hackathonapp.model.session.SessionInterceptor
 import com.example.hackathonapp.model.session.SessionStore
 import dagger.Module
@@ -86,6 +89,12 @@ class MainModule(val context: Context) {
 
     @Singleton
     @Provides
+    fun provideChannelsApi(retrofit: Retrofit): IChannelsApi {
+        return retrofit.create(IChannelsApi::class.java)
+    }
+
+    @Singleton
+    @Provides
     fun provideSessionStore(context: Context): SessionStore {
         val pref = context.getSharedPreferences("session", Activity.MODE_PRIVATE)
         return SessionStore(pref)
@@ -100,5 +109,12 @@ class MainModule(val context: Context) {
             accountApi,
             schedulers
         )
+    }
+
+    @Singleton
+    @Provides
+    fun provideChannelsInteractor(config: Config, channelsApi: IChannelsApi,
+                                  schedulers: RxSchedulers): IChannelsInteractor {
+        return ChannelsInteractor(config, channelsApi, schedulers)
     }
 }
