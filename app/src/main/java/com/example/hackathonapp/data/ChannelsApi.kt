@@ -3,6 +3,7 @@ package com.example.hackathonapp.data
 import android.util.Log
 import com.example.hackathonapp.model.Cache
 import com.example.hackathonapp.model.Config
+import com.example.hackathonapp.model.channels.ChannelStatus
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -22,10 +23,11 @@ interface IChannelsApi {
 
     fun checkCache(urls: List<String>): Cache
     fun getPlaylist(cacheId: String? = null): String
+    //fun getChannelStatus(): ChannelStatus
 
 }
 
-class ChannelsApi(val client: OkHttpClient): IChannelsApi {
+class ChannelsApi(private val client: OkHttpClient): IChannelsApi {
 
     companion object{
         val TAG = ChannelsApi::class.java.name
@@ -38,6 +40,7 @@ class ChannelsApi(val client: OkHttpClient): IChannelsApi {
         for (url in urls){
 
             val request = Request.Builder()
+                .get()
                 .url(url)
                 .build()
 
@@ -83,5 +86,7 @@ class ChannelsApi(val client: OkHttpClient): IChannelsApi {
         return ""
     }
 
+    /*override fun getChannelStatus(): ChannelStatus {
 
+    }*/
 }

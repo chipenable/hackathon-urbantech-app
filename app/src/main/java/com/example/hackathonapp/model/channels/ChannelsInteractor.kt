@@ -37,12 +37,12 @@ class ChannelsInteractor(private val config: Config, private val channelsApi: IC
 
         return Observable.interval(0, 5, TimeUnit.SECONDS)
             .concatMap { cacheObs }
-            .map {
+            /*.map {
                 if (Random.nextBoolean()) {
                     it.id = ""
                 }
                 it
-            }
+            }*/
             .filter {
                 val result = if (it != lastCache) {
                     lastCache = it
@@ -55,12 +55,13 @@ class ChannelsInteractor(private val config: Config, private val channelsApi: IC
                 result
             }
             .map { cache ->
-                if (cache.id.isEmpty()) {
+                val result = if (cache.id.isEmpty()) {
                     config.playlistUrl
                 } else {
                     "${config.playlistUrl}?cache_id=${cache.id}"
                 }
-
+                Log.d(TAG, "playlist: $result")
+                result
             }
 
             .compose(schedulers.fromIoToUiSchedulersObs())

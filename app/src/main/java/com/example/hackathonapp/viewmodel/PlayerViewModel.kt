@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.hackathonapp.di.MainComponent
 import com.example.hackathonapp.model.channels.IChannelsInteractor
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 class PlayerVMFactory(private val mainComponent: MainComponent): ViewModelProvider.Factory {
@@ -26,6 +27,8 @@ class PlayerViewModel(mainComponent: MainComponent) : ViewModel() {
 
     val playlist = MutableLiveData<String>()
 
+    private var playlistDisp: Disposable? = null
+
     companion object{
         val TAG = PlayerViewModel::class.java.name
     }
@@ -35,15 +38,20 @@ class PlayerViewModel(mainComponent: MainComponent) : ViewModel() {
     }
 
     fun loadPlaylist(){
-        val playlistDisp = channelsInteractor.getPlaylist()
+        Log.d(TAG, "load playlist")
+        playlistDisp = channelsInteractor.getPlaylist()
             .subscribe(
                 { it ->
                     Log.d(TAG, "playlist: $it")
                     playlist.value = it
                 },
-                { error -> },
+                { error -> Log.d(TAG, "error: $error")},
                 {}
             )
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        playlistDisp?.dispose()
+    }
 }

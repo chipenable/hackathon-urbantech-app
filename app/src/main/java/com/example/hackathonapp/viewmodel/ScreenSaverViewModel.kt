@@ -22,37 +22,12 @@ class ScreenSaverVMFactory(private val mainComponent: MainComponent): ViewModelP
 
 class ScreenSaverViewModel(mainComponent: MainComponent) : ViewModel() {
 
-    val isAuthorized = SingleLiveEvent<Boolean>()
-
-    @Inject
-    lateinit var sessionStore: SessionStore
-
-    @Inject
-    lateinit var accountInteracor: IAccountInteractor
-
-    private var sessionDisp: Disposable? = null
-
     init {
         mainComponent.inject(this)
     }
 
-    fun checkSession(){
-        sessionDisp = accountInteracor.checkSession()
-            .subscribe(this::handleResult, this::handleError)
-
-    }
-
     override fun onCleared() {
         super.onCleared()
-        sessionDisp?.dispose()
     }
 
-    private fun handleResult(result: Boolean){
-        isAuthorized.value = result
-        //isAuthorized.value = true
-    }
-
-    private fun handleError(error: Throwable){
-
-    }
 }

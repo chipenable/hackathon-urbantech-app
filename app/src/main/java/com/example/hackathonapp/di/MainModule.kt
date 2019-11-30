@@ -2,6 +2,7 @@ package com.example.hackathonapp.di
 
 import android.app.Activity
 import android.content.Context
+import com.example.hackathonapp.data.ChannelsApi
 import com.example.hackathonapp.data.IAccountApi
 import com.example.hackathonapp.data.IChannelsApi
 import com.example.hackathonapp.model.*
@@ -45,10 +46,10 @@ class MainModule(val context: Context) {
         val baseUrl = "http://46.61.193.144"
 
         val cacheUrls = listOf(
-            "$baseUrl:8080/cache_id",
-            "$baseUrl:8081/cache_id"
+            "$baseUrl:8080/cache_id"
+            //"$baseUrl:8081/cache_id"
         )
-        val playlistUrl = "$baseUrl/playlist"
+        val playlistUrl = "$baseUrl/playlist/index.m3u8"
 
         return Config(baseUrl, cacheUrls, playlistUrl)
     }
@@ -89,8 +90,8 @@ class MainModule(val context: Context) {
 
     @Singleton
     @Provides
-    fun provideChannelsApi(retrofit: Retrofit): IChannelsApi {
-        return retrofit.create(IChannelsApi::class.java)
+    fun provideChannelsApi(client: OkHttpClient): IChannelsApi {
+        return ChannelsApi(client)
     }
 
     @Singleton

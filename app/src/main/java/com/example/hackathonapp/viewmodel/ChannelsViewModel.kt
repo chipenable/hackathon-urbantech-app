@@ -38,9 +38,10 @@ class ChannelsViewModel(mainComponent: MainComponent) : ViewModel() {
         mainComponent.inject(this)
 
         channels.value = listOf(
-            Channel("one", "", true),
-            Channel("two", "", true),
-            Channel("three", "", false)
+            Channel("camera one", "", true),
+            Channel("camera two", "", true),
+            Channel("camera three", "", false),
+            Channel("camera four", "", false)
         )
 
     }
@@ -53,7 +54,9 @@ class ChannelsViewModel(mainComponent: MainComponent) : ViewModel() {
     fun showChannel(position: Int){
         val channel = channels.value?.get(position)
         channel?.let {
-            showChannel.value = it
+            if (it.isFree) {
+                showChannel.value = it
+            }
         }
     }
 

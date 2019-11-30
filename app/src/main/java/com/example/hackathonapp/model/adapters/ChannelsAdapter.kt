@@ -50,12 +50,17 @@ class ChannelAdapter: RecyclerView.Adapter<ChannelAdapter.ViewHolder>() {
                 .into(holder.thumbnail)
         }
 
+        if (!channel.isFree){
+            holder.status.setImageResource(R.drawable.ic_lock)
+        }
+
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view){
 
         val title: TextView = view.titleView
         val thumbnail: ImageView = view.imageView
+        val status: ImageView = view.statusView
 
         init{
             view.setOnClickListener {

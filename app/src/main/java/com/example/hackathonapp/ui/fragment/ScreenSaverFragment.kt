@@ -33,17 +33,6 @@ class ScreenSaverFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val factory = ScreenSaverVMFactory(mainComponent)
         viewModel = ViewModelProviders.of(this, factory).get(ScreenSaverViewModel::class.java)
-
-        viewModel.isAuthorized.observe(this, Observer {
-            /*if (!it){
-                findNavController().navigate(R.id.action_screenSaverFragment_to_loginFragment)
-            }
-            else{
-                findNavController().navigate(R.id.action_screenSaverFragment_to_channelsFragment)
-            }*/
-        })
-
-        viewModel.checkSession()
     }
 
 }
