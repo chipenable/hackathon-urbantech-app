@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:enabled="true"
         android:icon="@drawable/ic_store"
         android:visible="true"
         app:showAsAction="ifRoom"

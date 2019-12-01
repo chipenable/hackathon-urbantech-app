@@ -8,4 +8,7 @@
     <string name="storeMenuTitle">Магазин</string>
     <string name="login_to_have_access">Для получения доступа к этим каналам, вам нужно авторизоваться</string>
     <string name="login_screen_title">Авторизация</string>
+    <string name="store_screen_title">Магазин</string>
+    <string name="payment_screen_title">Подтверждение покупки</string>
+    <string name="login_to_open_store">Для получения доступа к магазину, вам нужно авторизоваться</string>
 </resources>

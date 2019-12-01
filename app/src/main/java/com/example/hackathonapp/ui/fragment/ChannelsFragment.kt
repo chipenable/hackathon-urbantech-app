@@ -15,11 +15,13 @@ import com.example.hackathonapp.R
 import com.example.hackathonapp.model.adapters.ChannelAdapter
 import com.example.hackathonapp.model.channels.ChannelEvent
 import com.example.hackathonapp.ui.common.dpToPx
+import com.example.hackathonapp.ui.common.enableUpButton
 import com.example.hackathonapp.ui.common.mainComponent
 import com.example.hackathonapp.ui.common.setTitle
 import com.example.hackathonapp.viewmodel.ChannelsVMFactory
 import com.example.hackathonapp.viewmodel.ChannelsViewModel
 import kotlinx.android.synthetic.main.channels_fragment.*
+import org.jetbrains.anko.support.v4.toast
 import ru.chipenable.hackathonvideoapp.model.util.GridSpacingItemDecoration
 
 class ChannelsFragment : Fragment() {
@@ -48,6 +50,7 @@ class ChannelsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         setTitle(R.string.app_name)
+        enableUpButton(false)
 
         val factory = ChannelsVMFactory(mainComponent)
         viewModel = ViewModelProviders.of(this, factory).get(ChannelsViewModel::class.java)
@@ -101,6 +104,11 @@ class ChannelsFragment : Fragment() {
 
             R.id.storeItem -> {
                 findNavController().navigate(R.id.storeFragment)
+                true
+            }
+
+            R.id.disabledStoreItem -> {
+                toast(R.string.login_to_open_store)
                 true
             }
 

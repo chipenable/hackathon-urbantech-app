@@ -39,5 +39,14 @@
         android:id="@+id/storeFragment"
         android:name="com.example.hackathonapp.ui.fragment.StoreFragment"
         android:label="store_fragment"
-        tools:layout="@layout/store_fragment" />
+        tools:layout="@layout/store_fragment" >
+        <action
+            android:id="@+id/action_storeFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.hackathonapp.ui.fragment.PaymentFragment"
+        android:label="payment_fragment"
+        tools:layout="@layout/payment_fragment" />
 </navigation>

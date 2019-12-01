@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.hackathonapp.R
 import com.example.hackathonapp.di.MainComponent
 import com.example.hackathonapp.model.products.Product
+import com.example.hackathonapp.model.util.SingleLiveEvent
 
 class StoreVMFactory(private val mainComponent: MainComponent): ViewModelProvider.Factory {
 
@@ -21,20 +22,24 @@ class StoreVMFactory(private val mainComponent: MainComponent): ViewModelProvide
 class StoreViewModel(mainComponent: MainComponent) : ViewModel() {
 
     val products = MutableLiveData<List<Product>>()
+    val buyEvent = SingleLiveEvent<Boolean>()
 
     init {
         mainComponent.inject(this)
 
         products.value = listOf(
-            Product(R.drawable.product_1),
-            Product(R.drawable.product_2),
-            Product(R.drawable.product_3),
-            Product(R.drawable.product_4),
-            Product(R.drawable.product_5),
-            Product(R.drawable.product_6)
+            Product("Попкорн", R.drawable.product_1),
+            Product("Минеральная вода", R.drawable.product_2),
+            Product("Powerbank", R.drawable.product_3),
+            Product("Хот-дог", R.drawable.product_4),
+            Product("Coca-cola", R.drawable.product_5),
+            Product("Зонтик", R.drawable.product_6)
         )
 
+    }
 
+    fun buyProduct(position: Int){
+        buyEvent.value = true
     }
 
 }

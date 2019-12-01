@@ -51,7 +51,7 @@ class ProductAdapter: RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
         fun bind(product: Product){
 
-            title.text = ""
+            title.text = product.title
 
             product.thumbnail.let{
                 Glide.with(thumbnail.context)

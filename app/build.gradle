@@ -8,7 +8,18 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
+    
+    signingConfigs {
+        config {
+            storeFile file("./release.jks")
+            storePassword "s7p4od2"
+            keyAlias "release"
+            keyPassword "r5o8lw3"
+        }
+    }
+
     defaultConfig {
+        signingConfig signingConfigs.config
         applicationId "com.example.hackathonapp"
         minSdkVersion 21
         targetSdkVersion 29
@@ -16,6 +27,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+
+
     buildTypes {
         release {
             minifyEnabled false

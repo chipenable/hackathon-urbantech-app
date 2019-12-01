@@ -3,7 +3,7 @@ package com.example.hackathonapp.model.channels
 /**
  * Created by Pavel.B on 30.11.2019.
  */
-class Channel(val title: String, val thumbnail: Int?, var isFree: Boolean)
+class Channel(val title: String, val thumbnail: Int?, var isFree: Boolean, var isPaid: Boolean = false)
 
 data class ChannelStatus(var available: Boolean, var msg: String, var query_id: String, var delta: Int?)
 

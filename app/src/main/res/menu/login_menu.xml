@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:icon="@drawable/ic_store_disabled"
+        android:visible="true"
+        app:showAsAction="ifRoom"
+        android:title="@string/storeMenuTitle"
+        android:id="@+id/disabledStoreItem"/>
+
+    <item
         app:showAsAction="ifRoom"
         android:title="@string/loginMenuTitle"
         android:id="@+id/loginItem"/>
