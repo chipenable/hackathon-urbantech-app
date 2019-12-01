@@ -1,4 +1,4 @@
-package com.example.hackathonapp.model.products
+package com.example.hackathonapp.model.store
 
 import com.example.hackathonapp.R
 import io.reactivex.Observable

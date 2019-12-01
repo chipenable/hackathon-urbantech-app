@@ -9,3 +9,7 @@ data class Account(
     var name: String,
     var session: String
 )
+
+data class UserSubscription(
+    var hasSubscription: Boolean = false
+)

@@ -11,9 +11,13 @@
     <string name="store_screen_title">Магазин</string>
     <string name="payment_screen_title">Платеж</string>
     <string name="agree_payment">Для приобретения данного продукта, вам необходимо подтвердить покупку</string>
+    <string name="agree_subscription">Данный канал досупен только по подписке</string>
     <string name="login_to_open_store">Для получения доступа к магазину, вам нужно авторизоваться</string>
     <string name="agreeBut">Подтвердить</string>
     <string name="refuseBut">Отказаться</string>
     <string name="payment_result_is_success">Платеж успешно проведен. Продукт будет доставлен на ваше место в течение 10 минут</string>
     <string name="cancel">Отменить</string>
+    <string name="subscription">Подписка</string>
+    <string name="buySubscription">Купить подписку за 10\u20BD</string>
+    <string name="you_bought_subscription">Подписка оформлена</string>
 </resources>

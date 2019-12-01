@@ -64,7 +64,7 @@ class ChannelAdapter: RecyclerView.Adapter<ChannelAdapter.ViewHolder>() {
                     .into(thumbnail)
             }
 
-            if (!channel.isFree){
+            if (!channel.isFree || channel.withSubscription){
                 status.visibility = View.VISIBLE
                 status.setImageResource(R.drawable.ic_lock)
             }

@@ -91,7 +91,7 @@ class ChannelsApi(private val client: OkHttpClient): IChannelsApi {
             Channel("camera three", R.drawable.channel_3, false),
             Channel("camera four", R.drawable.channel_4, false),
             Channel("camera five", R.drawable.channel_5, false),
-            Channel("camera six", R.drawable.channel_6, false)
+            Channel("camera six", R.drawable.channel_6, false, true)
         )
 
         return if (isAuthorised){

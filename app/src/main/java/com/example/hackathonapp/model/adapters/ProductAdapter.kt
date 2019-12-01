@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.hackathonapp.R
-import com.example.hackathonapp.model.channels.Channel
-import com.example.hackathonapp.model.products.Product
+import com.example.hackathonapp.model.store.Product
 import kotlinx.android.synthetic.main.channel_item.view.*
 
 /**

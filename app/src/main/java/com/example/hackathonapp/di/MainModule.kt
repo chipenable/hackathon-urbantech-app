@@ -9,16 +9,16 @@ import com.example.hackathonapp.data.IQueryApi
 import com.example.hackathonapp.model.*
 import com.example.hackathonapp.model.account.AccountInteractor
 import com.example.hackathonapp.model.account.IAccountInteractor
+import com.example.hackathonapp.model.account.UserSubscription
 import com.example.hackathonapp.model.channels.ChannelsInteractor
 import com.example.hackathonapp.model.channels.IChannelsInteractor
-import com.example.hackathonapp.model.products.IStoreInteractor
-import com.example.hackathonapp.model.products.StoreInteractor
+import com.example.hackathonapp.model.store.IStoreInteractor
+import com.example.hackathonapp.model.store.StoreInteractor
 import com.example.hackathonapp.model.session.SessionInterceptor
 import com.example.hackathonapp.model.session.SessionStore
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.chipenable.hackathonvideoapp.model.util.RxSchedulers
@@ -128,5 +128,11 @@ class MainModule(val context: Context) {
     @Provides
     fun provideStoreInteractor(schedulers: RxSchedulers): IStoreInteractor {
         return StoreInteractor(schedulers)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserSubscription(): UserSubscription {
+        return UserSubscription()
     }
 }

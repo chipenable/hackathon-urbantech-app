@@ -11,18 +11,18 @@ import com.example.hackathonapp.R
 import com.example.hackathonapp.model.store.PaymentResult
 import com.example.hackathonapp.ui.common.mainComponent
 import com.example.hackathonapp.ui.common.setTitle
-import com.example.hackathonapp.viewmodel.PaymentVMFactory
-import com.example.hackathonapp.viewmodel.PaymentViewModel
+import com.example.hackathonapp.viewmodel.SubscriptionVMFactory
+import com.example.hackathonapp.viewmodel.SubscriptionViewModel
 import kotlinx.android.synthetic.main.payment_fragment.*
 import org.jetbrains.anko.support.v4.toast
 
-class PaymentFragment : Fragment() {
+class SubscriptionFragment : Fragment() {
 
     companion object {
-        fun newInstance() = PaymentFragment()
+        fun newInstance() = SubscriptionFragment()
     }
 
-    private lateinit var viewModel: PaymentViewModel
+    private lateinit var viewModel: SubscriptionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,32 +33,21 @@ class PaymentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.payment_fragment, container, false)
+        return inflater.inflate(R.layout.subscription_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setTitle(R.string.payment_screen_title)
+        val factory = SubscriptionVMFactory(mainComponent)
+        viewModel = ViewModelProviders.of(this, factory).get(SubscriptionViewModel::class.java)
 
-        var productId = arguments?.getString("product_id")
-        if (productId == null){
-            productId = ""
-            findNavController().navigateUp()
-            toast("Не удается обработать покупку")
-        }
-
-        val factory = PaymentVMFactory(mainComponent, productId)
-        viewModel = ViewModelProviders.of(this, factory).get(PaymentViewModel::class.java)
-
-        viewModel.product.observe(this, Observer {
-            productIconView.setImageResource(it.thumbnail)
-        })
+        setTitle(R.string.subscription)
 
         viewModel.payment.observe(this, Observer {
             progressBar.visibility = if (it is PaymentResult.Processing) View.VISIBLE else View.INVISIBLE
             if (it is PaymentResult.Success){
                 findNavController().navigateUp()
-                toast(R.string.payment_result_is_success)
+                toast(R.string.you_bought_subscription)
             }
         })
 

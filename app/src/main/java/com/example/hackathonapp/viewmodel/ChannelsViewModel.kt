@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.hackathonapp.di.MainComponent
 import com.example.hackathonapp.model.channels.Channel
 import com.example.hackathonapp.model.account.IAccountInteractor
+import com.example.hackathonapp.model.account.UserSubscription
 import com.example.hackathonapp.model.channels.ChannelEvent
 import com.example.hackathonapp.model.channels.IChannelsInteractor
 import com.example.hackathonapp.model.util.SingleLiveEvent
@@ -35,10 +36,14 @@ class ChannelsViewModel(mainComponent: MainComponent) : ViewModel() {
     lateinit var accountInteractor: IAccountInteractor
 
     @Inject
+    lateinit var userSubscription: UserSubscription
+
+    @Inject
     lateinit var channelsInteractor: IChannelsInteractor
 
     private var sessionDisp: Disposable? = null
     private var logoutDisp: Disposable? = null
+    private var channelsDisp: Disposable? = null
 
     init{
         mainComponent.inject(this)
@@ -53,7 +58,12 @@ class ChannelsViewModel(mainComponent: MainComponent) : ViewModel() {
         val channel = channels.value?.get(position)
         channel?.let {
             channelEvent.value = if (it.isFree) {
-                ChannelEvent.ShowChannel(position)
+                if (!it.withSubscription) {
+                    ChannelEvent.ShowChannel(position)
+                }
+                else{
+                    ChannelEvent.SuggestSubscription(position)
+                }
             }
             else{
                 ChannelEvent.SuggestLogin()
@@ -70,15 +80,22 @@ class ChannelsViewModel(mainComponent: MainComponent) : ViewModel() {
         super.onCleared()
         sessionDisp?.dispose()
         logoutDisp?.dispose()
+        channelsDisp?.dispose()
     }
 
-    private fun updateChannels(){
-
-    }
 
     private fun handleResult(result: Boolean){
         this.isAuthorised.value = result
-        channelsInteractor.getChannels(result)
+        channelsDisp = channelsInteractor.getChannels(result)
+            .map { channelList ->
+                if (userSubscription.hasSubscription) {
+                    channelList.forEach{ channel -> channel.withSubscription = false }
+                    channelList
+                }
+                else {
+                    channelList
+                }
+            }
             .subscribe( {channels.value = it }, {} )
     }
 

@@ -72,13 +72,20 @@ class ChannelsFragment : Fragment() {
         })
 
         viewModel.channelEvent.observe(this, Observer {
-            if (it is ChannelEvent.ShowChannel) {
-                val bundle = bundleOf("channel" to it.position)
-                findNavController().navigate(R.id.action_channelsFragment_to_playerFragment, bundle)
-            }
-            else if (it is ChannelEvent.SuggestLogin){
-                val bundle = bundleOf("title" to getString(R.string.login_to_have_access))
-                findNavController().navigate(R.id.action_channelsFragment_to_loginFragment, bundle)
+            when(it) {
+                is ChannelEvent.ShowChannel -> {
+                    val bundle = bundleOf("channel" to it.position)
+                    findNavController().navigate(R.id.action_channelsFragment_to_playerFragment, bundle)
+                }
+
+                is ChannelEvent.SuggestLogin -> {
+                    val bundle = bundleOf("title" to getString(R.string.login_to_have_access))
+                    findNavController().navigate(R.id.action_channelsFragment_to_loginFragment, bundle)
+                }
+
+                is ChannelEvent.SuggestSubscription -> {
+                    findNavController().navigate(R.id.action_channelsFragment_to_subscriptionFragment)
+                }
             }
         })
 

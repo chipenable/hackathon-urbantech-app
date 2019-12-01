@@ -4,9 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.hackathonapp.di.MainComponent
-import com.example.hackathonapp.model.products.IStoreInteractor
-import com.example.hackathonapp.model.products.PaymentResult
-import com.example.hackathonapp.model.products.Product
+import com.example.hackathonapp.model.store.IStoreInteractor
+import com.example.hackathonapp.model.store.PaymentResult
+import com.example.hackathonapp.model.store.Product
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 

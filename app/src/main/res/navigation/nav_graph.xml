@@ -29,6 +29,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_channelsFragment_to_subscriptionFragment"
+            app:destination="@id/subscriptionFragment" />
     </fragment>
     <fragment
         android:id="@+id/playerFragment"
@@ -52,14 +55,9 @@
         android:id="@+id/paymentFragment"
         android:name="com.example.hackathonapp.ui.fragment.PaymentFragment"
         android:label="payment_fragment"
-        tools:layout="@layout/payment_fragment" >
-        <action
-            android:id="@+id/action_paymentFragment_to_paymentResultFragment"
-            app:destination="@id/paymentResultFragment" />
-    </fragment>
+        tools:layout="@layout/payment_fragment" />
     <fragment
-        android:id="@+id/paymentResultFragment"
-        android:name="com.example.hackathonapp.ui.fragment.PaymentResultFragment"
-        android:label="fragment_payment_result"
-        tools:layout="@layout/fragment_payment_result" />
+        android:id="@+id/subscriptionFragment"
+        android:name="com.example.hackathonapp.ui.fragment.SubscriptionFragment"
+        android:label="SubscriptionFragment" />
 </navigation>

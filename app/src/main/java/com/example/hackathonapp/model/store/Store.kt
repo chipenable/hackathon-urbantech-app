@@ -1,4 +1,4 @@
-package com.example.hackathonapp.model.products
+package com.example.hackathonapp.model.store
 
 /**
  * Created by Pavel.B on 01.12.2019.
