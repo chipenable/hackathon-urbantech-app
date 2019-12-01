@@ -52,6 +52,10 @@ class PlayerFragment : Fragment() {
         player = ExoPlayerFactory.newSimpleInstance(activity)
         playerView.player = player
 
+        viewModel.alertMsg.observe(this, Observer {
+            showAlert(it)
+        })
+
     }
 
     override fun onStart() {
@@ -113,6 +117,11 @@ class PlayerFragment : Fragment() {
         val dataSourceFactory: DataSource.Factory = DefaultDataSourceFactory(activity, "exoplayer")
         return HlsMediaSource.Factory(dataSourceFactory)
             .createMediaSource(uri)
+    }
+
+    private fun showAlert(title: String){
+        alertView.visibility = if (title.isNotEmpty()) View.VISIBLE else View.INVISIBLE
+        alertTitle.text = title
     }
 
 }

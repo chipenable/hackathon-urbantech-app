@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 
 import com.example.hackathonapp.R
 import com.example.hackathonapp.model.account.AuthResult
 import com.example.hackathonapp.ui.common.mainComponent
+import com.example.hackathonapp.ui.common.setTitle
 import com.example.hackathonapp.viewmodel.LoginVMFactory
 import com.example.hackathonapp.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.login_fragment.*
@@ -36,6 +38,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
         super.onActivityCreated(savedInstanceState)
         val factory = LoginVMFactory(mainComponent)
         viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
+
+        val title = arguments?.getString("title", "") ?: ""
+        toast(title)
+
+        setTitle(R.string.login_screen_title)
 
         signInBut.setOnClickListener(this)
 

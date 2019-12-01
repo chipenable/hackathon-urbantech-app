@@ -1,8 +1,10 @@
 package com.example.hackathonapp.model.adapters
 
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -40,31 +42,54 @@ class ChannelAdapter: RecyclerView.Adapter<ChannelAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val channel = data[position]
-        holder.title.text = channel.title
-
-
-        if (channel.thumbnail.isNotEmpty()) {
-            Glide.with(holder.thumbnail.context)
-                .load(channel.thumbnail)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.thumbnail)
-        }
-
-        if (!channel.isFree){
-            holder.status.setImageResource(R.drawable.ic_lock)
-        }
-
+        holder.bind(channel)
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view){
 
-        val title: TextView = view.titleView
-        val thumbnail: ImageView = view.imageView
-        val status: ImageView = view.statusView
+        private val frame: ViewGroup = view.frameView
+        private val title: TextView = view.titleView
+        private val thumbnail: ImageView = view.imageView
+        private val status: ImageView = view.statusView
 
-        init{
-            view.setOnClickListener {
+        fun bind(channel: Channel){
+
+            title.text = channel.title
+
+            channel.thumbnail?.let{
+                Glide.with(thumbnail.context)
+                    .load(it)
+                    //.diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(thumbnail)
+            }
+
+            if (!channel.isFree){
+                status.visibility = View.VISIBLE
+                status.setImageResource(R.drawable.ic_lock)
+            }
+            else{
+                status.visibility = View.INVISIBLE
+                status.setImageDrawable(null)
+            }
+
+            frame.setOnClickListener {
                 itemClickListener?.invoke(adapterPosition)
+            }
+
+            frame.setOnTouchListener { _, event ->
+                when(event.action){
+                    MotionEvent.ACTION_DOWN -> {
+                        frame.animate().scaleX(1.01f).scaleY(1.01f).duration = 100
+                        false
+                    }
+
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        frame.animate().scaleX(1f).scaleY(1f).duration = 100
+                        false
+                    }
+
+                    else -> false
+                }
             }
         }
 

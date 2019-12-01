@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#6200ee</color>
+    <color name="colorPrimaryDark">#3700b3</color>
+    <color name="colorAccent">#e65100</color>
     <color name="channelItemBackground">#cccccccc</color>
+
+    <color name="white">#ffffffff</color>
+    <color name="red">#ff0000</color>
+    <color name="light_pink">#ff6289</color>
+    <color name="gold">#ffd800</color>
+    <color name="black">#000000</color>
+    <color name="blue">#5C5CF6</color>
+    <color name="light_grey">#cccccc</color>
+    <color name="grey">#888888</color>
+    <color name="silver">#bdbdbd</color>
+    <color name="blond">#fff4be</color>
+
+    <color name="itemStroke">#55607D8B</color>
+    <color name="transparent_white">#66ffffff</color>
+    <color name="item_gradient_start_color">#444444</color>
+
 </resources>

@@ -15,7 +15,7 @@ import kotlin.random.Random
 interface IChannelsInteractor {
 
     fun getPlaylist(): Observable<String>
-
+    fun getChannels(isAuthorised: Boolean): Observable<List<Channel>>
 }
 
 class ChannelsInteractor(private val config: Config, private val channelsApi: IChannelsApi,
@@ -29,6 +29,8 @@ class ChannelsInteractor(private val config: Config, private val channelsApi: IC
     private var lastCache: Cache? = null
 
     override fun getPlaylist(): Observable<String> {
+        lastCache = null
+
         val cacheObs = Observable.fromCallable {
             val cache = channelsApi.checkCache(config.cacheUrls)
             Log.d(TAG, "cache: $cache")
@@ -65,5 +67,9 @@ class ChannelsInteractor(private val config: Config, private val channelsApi: IC
             }
 
             .compose(schedulers.fromIoToUiSchedulersObs())
+    }
+
+    override fun getChannels(isAuthorised: Boolean): Observable<List<Channel>> {
+        return Observable.fromCallable { channelsApi.getChannels(isAuthorised) }
     }
 }

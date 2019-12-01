@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
+    android:id="@+id/frameView"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tool="http://schemas.android.com/tools"
     android:background="@color/channelItemBackground"
@@ -8,14 +12,6 @@
     android:layout_width="match_parent"
     android:layout_height="150dp">
 
-    <TextView
-        android:layout_gravity="center"
-        android:padding="16dp"
-        tool:text="test"
-        android:id="@+id/titleView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
     <ImageView
         android:scaleType="centerCrop"
         android:id="@+id/imageView"
@@ -23,11 +19,21 @@
         android:layout_height="match_parent"/>
 
     <ImageView
-        android:layout_margin="8dp"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="center"
         android:id="@+id/statusView"
         android:scaleType="centerCrop"
         android:layout_width="36dp"
         android:layout_height="36dp"/>
+
+    <TextView
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:background="@drawable/item_gradient"
+        android:layout_gravity="bottom|left"
+        android:padding="8dp"
+        tool:text="test"
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>

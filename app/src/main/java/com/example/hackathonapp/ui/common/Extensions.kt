@@ -12,5 +12,13 @@ import com.example.hackathonapp.di.MainComponent
 val Fragment.mainComponent: MainComponent
 get() = (context!!.applicationContext as App).mainComponent
 
+fun Fragment.setTitle(title: String){
+    activity?.title = title
+}
+
+fun Fragment.setTitle(titleId: Int){
+    activity?.title = getString(titleId)
+}
+
 fun Fragment.dpToPx(dp: Int)
         = (dp * resources.displayMetrics.densityDpi.toFloat()/ DENSITY_DEFAULT.toFloat()).toInt()

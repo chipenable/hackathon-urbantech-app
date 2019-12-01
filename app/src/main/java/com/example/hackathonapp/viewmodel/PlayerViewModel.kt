@@ -26,6 +26,7 @@ class PlayerViewModel(mainComponent: MainComponent) : ViewModel() {
     lateinit var channelsInteractor: IChannelsInteractor
 
     val playlist = MutableLiveData<String>()
+    val alertMsg = MutableLiveData<String>()
 
     private var playlistDisp: Disposable? = null
 
@@ -35,6 +36,8 @@ class PlayerViewModel(mainComponent: MainComponent) : ViewModel() {
 
     init {
         mainComponent.inject(this)
+
+        alertMsg.value = "подождите идет загрузка"
     }
 
     fun loadPlaylist(){

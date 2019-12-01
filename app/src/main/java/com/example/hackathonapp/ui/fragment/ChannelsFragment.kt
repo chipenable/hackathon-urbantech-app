@@ -6,14 +6,17 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.GridLayout
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 
 import com.example.hackathonapp.R
 import com.example.hackathonapp.model.adapters.ChannelAdapter
+import com.example.hackathonapp.model.channels.ChannelEvent
 import com.example.hackathonapp.ui.common.dpToPx
 import com.example.hackathonapp.ui.common.mainComponent
+import com.example.hackathonapp.ui.common.setTitle
 import com.example.hackathonapp.viewmodel.ChannelsVMFactory
 import com.example.hackathonapp.viewmodel.ChannelsViewModel
 import kotlinx.android.synthetic.main.channels_fragment.*
@@ -44,10 +47,12 @@ class ChannelsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        setTitle(R.string.app_name)
+
         val factory = ChannelsVMFactory(mainComponent)
         viewModel = ViewModelProviders.of(this, factory).get(ChannelsViewModel::class.java)
 
-        val columns = 2
+        val columns = resources.getInteger(R.integer.channel_col)
         listView.layoutManager = GridLayoutManager(context, columns, GridLayoutManager.VERTICAL, false)
         val adapter = ChannelAdapter()
         listView.adapter = adapter
@@ -63,11 +68,17 @@ class ChannelsFragment : Fragment() {
             updateMenu(it)
         })
 
-        viewModel.showChannel.observe(this, Observer {
-            findNavController().navigate(R.id.action_channelsFragment_to_playerFragment)
+        viewModel.channelEvent.observe(this, Observer {
+            if (it is ChannelEvent.ShowChannel) {
+                findNavController().navigate(R.id.action_channelsFragment_to_playerFragment)
+            }
+            else if (it is ChannelEvent.SuggestLogin){
+                val bundle = bundleOf("title" to getString(R.string.login_to_have_access))
+                findNavController().navigate(R.id.action_channelsFragment_to_loginFragment, bundle)
+            }
         })
 
-        viewModel.checkSession()
+        viewModel.loadChannels()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

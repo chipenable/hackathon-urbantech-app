@@ -1,8 +1,11 @@
 package com.example.hackathonapp.data
 
+import android.content.res.Resources
 import android.util.Log
+import com.example.hackathonapp.R
 import com.example.hackathonapp.model.Cache
 import com.example.hackathonapp.model.Config
+import com.example.hackathonapp.model.channels.Channel
 import com.example.hackathonapp.model.channels.ChannelStatus
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
@@ -23,6 +26,7 @@ interface IChannelsApi {
 
     fun checkCache(urls: List<String>): Cache
     fun getPlaylist(cacheId: String? = null): String
+    fun getChannels(isAuthorised: Boolean): List<Channel>
     //fun getChannelStatus(): ChannelStatus
 
 }
@@ -84,6 +88,26 @@ class ChannelsApi(private val client: OkHttpClient): IChannelsApi {
     override fun getPlaylist(cacheId: String?): String {
 
         return ""
+    }
+
+    //заглушка
+    override fun getChannels(isAuthorised: Boolean): List<Channel> {
+        val channels = listOf(
+            Channel("camera one", R.drawable.channel_1, true),
+            Channel("camera two", R.drawable.channel_2, true),
+            Channel("camera three", R.drawable.channel_3, false),
+            Channel("camera four", R.drawable.channel_4, false),
+            Channel("camera five", R.drawable.channel_5, false),
+            Channel("camera six", R.drawable.channel_6, false)
+        )
+
+        return if (isAuthorised){
+            channels.forEach { it.isFree = true }
+            channels
+        }
+        else {
+            channels
+        }
     }
 
     /*override fun getChannelStatus(): ChannelStatus {

@@ -21,7 +21,7 @@
         <TextView
             android:text="Подождите 10 секунд"
             android:textSize="24sp"
-            android:id="@+id/progressText"
+            android:id="@+id/alertTitle"
             android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

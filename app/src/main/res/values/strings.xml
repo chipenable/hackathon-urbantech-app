@@ -5,4 +5,6 @@
     <string name="sign_in">Войти</string>
     <string name="loginMenuTitle">Войти</string>
     <string name="logoutMenuTitle">Выйти</string>
+    <string name="login_to_have_access">Для получения доступа к этим каналам, вам нужно авторизоваться</string>
+    <string name="login_screen_title">Авторизация</string>
 </resources>
