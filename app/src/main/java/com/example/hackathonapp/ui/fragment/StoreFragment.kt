@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -56,9 +57,11 @@ class StoreFragment : Fragment() {
             adapter.data = it
         })
 
-        viewModel.buyEvent.observe(this, Observer {
-            //findNavController().navigate(R.id.action_storeFragment_to_paymentFragment)
+        viewModel.buyProduct.observe(this, Observer {
+            val bundle = bundleOf("product_id" to it.id)
+            findNavController().navigate(R.id.action_storeFragment_to_paymentFragment, bundle)
         })
+
     }
 
 }

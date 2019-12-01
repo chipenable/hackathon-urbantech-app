@@ -38,11 +38,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
         return inflater.inflate(R.layout.login_fragment, container, false)
     }
 
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableUpButton(true)
-    }*/
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val factory = LoginVMFactory(mainComponent)

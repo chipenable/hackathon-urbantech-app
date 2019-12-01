@@ -42,11 +42,24 @@
         tools:layout="@layout/store_fragment" >
         <action
             android:id="@+id/action_storeFragment_to_paymentFragment"
-            app:destination="@id/paymentFragment" />
+            app:destination="@id/paymentFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"
         android:name="com.example.hackathonapp.ui.fragment.PaymentFragment"
         android:label="payment_fragment"
-        tools:layout="@layout/payment_fragment" />
+        tools:layout="@layout/payment_fragment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_paymentResultFragment"
+            app:destination="@id/paymentResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentResultFragment"
+        android:name="com.example.hackathonapp.ui.fragment.PaymentResultFragment"
+        android:label="fragment_payment_result"
+        tools:layout="@layout/fragment_payment_result" />
 </navigation>

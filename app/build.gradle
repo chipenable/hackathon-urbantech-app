@@ -8,7 +8,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
-    
+
     signingConfigs {
         config {
             storeFile file("./release.jks")
@@ -27,7 +27,6 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
 
 
     buildTypes {

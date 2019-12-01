@@ -16,5 +16,6 @@ interface MainComponent {
     fun inject(obj: ChannelsViewModel)
     fun inject(obj: PlayerViewModel)
     fun inject(obj: StoreViewModel)
+    fun inject(obj: PaymentViewModel)
 
 }

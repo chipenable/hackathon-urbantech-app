@@ -11,6 +11,8 @@ import com.example.hackathonapp.model.account.AccountInteractor
 import com.example.hackathonapp.model.account.IAccountInteractor
 import com.example.hackathonapp.model.channels.ChannelsInteractor
 import com.example.hackathonapp.model.channels.IChannelsInteractor
+import com.example.hackathonapp.model.products.IStoreInteractor
+import com.example.hackathonapp.model.products.StoreInteractor
 import com.example.hackathonapp.model.session.SessionInterceptor
 import com.example.hackathonapp.model.session.SessionStore
 import dagger.Module
@@ -120,5 +122,11 @@ class MainModule(val context: Context) {
     fun provideChannelsInteractor(config: Config, channelsApi: IChannelsApi,
                                   queryApi: IQueryApi, schedulers: RxSchedulers): IChannelsInteractor {
         return ChannelsInteractor(config, channelsApi, queryApi, schedulers)
+    }
+
+    @Singleton
+    @Provides
+    fun provideStoreInteractor(schedulers: RxSchedulers): IStoreInteractor {
+        return StoreInteractor(schedulers)
     }
 }

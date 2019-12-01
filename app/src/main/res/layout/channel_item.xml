@@ -1,39 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
     android:id="@+id/frameView"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_gravity="center"
+    android:background="@color/channelItemBackground"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?selectableItemBackground"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tool="http://schemas.android.com/tools"
-    android:background="@color/channelItemBackground"
-    android:orientation="vertical"
-    android:layout_gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:orientation="vertical">
 
     <ImageView
-        android:scaleType="centerCrop"
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
 
     <ImageView
-        android:layout_gravity="center"
         android:id="@+id/statusView"
-        android:scaleType="centerCrop"
         android:layout_width="36dp"
-        android:layout_height="36dp"/>
+        android:layout_height="36dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop" />
 
-    <TextView
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:background="@drawable/item_gradient"
-        android:layout_gravity="bottom|left"
-        android:padding="8dp"
-        tool:text="test"
-        android:id="@+id/titleView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/item_gradient"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tool:text="test" />
+
+        <TextView
+            android:id="@+id/priceView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tool:text="test" />
+
+    </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>

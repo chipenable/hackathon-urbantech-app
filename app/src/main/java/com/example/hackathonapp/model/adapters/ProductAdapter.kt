@@ -48,10 +48,12 @@ class ProductAdapter: RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
         private val title: TextView = view.titleView
         private val thumbnail: ImageView = view.imageView
         private val status: ImageView = view.statusView
+        private val price: TextView = view.priceView
 
         fun bind(product: Product){
 
             title.text = product.title
+            price.text = "${product.price}\u20BD"
 
             product.thumbnail.let{
                 Glide.with(thumbnail.context)
