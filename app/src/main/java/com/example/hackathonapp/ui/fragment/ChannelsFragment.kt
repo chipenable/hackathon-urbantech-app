@@ -70,7 +70,8 @@ class ChannelsFragment : Fragment() {
 
         viewModel.channelEvent.observe(this, Observer {
             if (it is ChannelEvent.ShowChannel) {
-                findNavController().navigate(R.id.action_channelsFragment_to_playerFragment)
+                val bundle = bundleOf("channel" to it.position)
+                findNavController().navigate(R.id.action_channelsFragment_to_playerFragment, bundle)
             }
             else if (it is ChannelEvent.SuggestLogin){
                 val bundle = bundleOf("title" to getString(R.string.login_to_have_access))
@@ -95,6 +96,11 @@ class ChannelsFragment : Fragment() {
 
             R.id.logoutItem -> {
                 viewModel.logout()
+                true
+            }
+
+            R.id.storeItem -> {
+                findNavController().navigate(R.id.storeFragment)
                 true
             }
 

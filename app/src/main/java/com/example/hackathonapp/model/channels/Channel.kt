@@ -5,12 +5,11 @@ package com.example.hackathonapp.model.channels
  */
 class Channel(val title: String, val thumbnail: Int?, var isFree: Boolean)
 
-class ChannelStatus(var available: Boolean, var message: String, var queryId: String, var delta: Int)
-
+data class ChannelStatus(var available: Boolean, var msg: String, var query_id: String, var delta: Int?)
 
 sealed class ChannelEvent {
 
-    class ShowChannel: ChannelEvent()
+    class ShowChannel(val position: Int): ChannelEvent()
     class SuggestLogin: ChannelEvent()
 
 }

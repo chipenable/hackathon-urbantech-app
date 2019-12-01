@@ -4,15 +4,14 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.hackathonapp.R
 import com.example.hackathonapp.model.channels.Channel
+import com.example.hackathonapp.model.products.Product
 import kotlinx.android.synthetic.main.channel_item.view.*
 
 /**
@@ -20,12 +19,9 @@ import kotlinx.android.synthetic.main.channel_item.view.*
  */
 
 
+class ProductAdapter: RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
-typealias OnItemClickListener = (Int) -> Unit
-
-class ChannelAdapter: RecyclerView.Adapter<ChannelAdapter.ViewHolder>() {
-
-    var data: List<Channel> = listOf()
+    var data: List<Product> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -42,8 +38,8 @@ class ChannelAdapter: RecyclerView.Adapter<ChannelAdapter.ViewHolder>() {
     override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val channel = data[position]
-        holder.bind(channel)
+        val product = data[position]
+        holder.bind(product)
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -53,24 +49,15 @@ class ChannelAdapter: RecyclerView.Adapter<ChannelAdapter.ViewHolder>() {
         private val thumbnail: ImageView = view.imageView
         private val status: ImageView = view.statusView
 
-        fun bind(channel: Channel){
+        fun bind(product: Product){
 
-            title.text = channel.title
+            title.text = ""
 
-            channel.thumbnail?.let{
+            product.thumbnail.let{
                 Glide.with(thumbnail.context)
                     .load(it)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(thumbnail)
-            }
-
-            if (!channel.isFree){
-                status.visibility = View.VISIBLE
-                status.setImageResource(R.drawable.ic_lock)
-            }
-            else{
-                status.visibility = View.INVISIBLE
-                status.setImageDrawable(null)
             }
 
             frame.setOnClickListener {

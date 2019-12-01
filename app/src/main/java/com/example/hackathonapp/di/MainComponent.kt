@@ -1,9 +1,6 @@
 package com.example.hackathonapp.di
 
-import com.example.hackathonapp.viewmodel.ChannelsViewModel
-import com.example.hackathonapp.viewmodel.LoginViewModel
-import com.example.hackathonapp.viewmodel.PlayerViewModel
-import com.example.hackathonapp.viewmodel.ScreenSaverViewModel
+import com.example.hackathonapp.viewmodel.*
 import dagger.Component
 import javax.inject.Singleton
 
@@ -18,5 +15,6 @@ interface MainComponent {
     fun inject(obj: LoginViewModel)
     fun inject(obj: ChannelsViewModel)
     fun inject(obj: PlayerViewModel)
+    fun inject(obj: StoreViewModel)
 
 }

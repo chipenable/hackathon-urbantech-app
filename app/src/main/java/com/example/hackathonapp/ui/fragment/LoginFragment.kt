@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 
 import com.example.hackathonapp.R
 import com.example.hackathonapp.model.account.AuthResult
+import com.example.hackathonapp.ui.common.hideSoftKeyboard
 import com.example.hackathonapp.ui.common.mainComponent
 import com.example.hackathonapp.ui.common.setTitle
 import com.example.hackathonapp.viewmodel.LoginVMFactory
@@ -40,7 +41,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
         viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
 
         val title = arguments?.getString("title", "") ?: ""
-        toast(title)
+        if (title.isNotEmpty()) {
+            toast(title)
+        }
 
         setTitle(R.string.login_screen_title)
 
@@ -66,6 +69,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View?) {
         val login = loginView.text.toString()
         val password = passwordView.text.toString()
+        hideSoftKeyboard(view)
         viewModel.signIn(login, password)
     }
 }

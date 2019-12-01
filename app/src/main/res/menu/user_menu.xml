@@ -4,6 +4,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:icon="@drawable/ic_store"
+        android:visible="true"
+        app:showAsAction="ifRoom"
+        android:title="@string/storeMenuTitle"
+        android:id="@+id/storeItem"/>
+
+    <item
         app:showAsAction="ifRoom"
         android:title="@string/logoutMenuTitle"
         android:id="@+id/logoutItem"/>

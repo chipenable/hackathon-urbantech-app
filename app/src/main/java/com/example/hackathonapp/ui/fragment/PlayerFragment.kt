@@ -45,9 +45,10 @@ class PlayerFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val factory = PlayerVMFactory(mainComponent)
+        val channelId = arguments?.getInt("channel") ?: 0
+        val factory = PlayerVMFactory(mainComponent, channelId)
         viewModel = ViewModelProviders.of(this, factory).get(PlayerViewModel::class.java)
-        viewModel.loadPlaylist()
+        //viewModel.loadPlaylist()
 
         player = ExoPlayerFactory.newSimpleInstance(activity)
         playerView.player = player

@@ -5,6 +5,7 @@ import android.content.Context
 import com.example.hackathonapp.data.ChannelsApi
 import com.example.hackathonapp.data.IAccountApi
 import com.example.hackathonapp.data.IChannelsApi
+import com.example.hackathonapp.data.IQueryApi
 import com.example.hackathonapp.model.*
 import com.example.hackathonapp.model.account.AccountInteractor
 import com.example.hackathonapp.model.account.IAccountInteractor
@@ -65,9 +66,9 @@ class MainModule(val context: Context) {
             )
         client.addInterceptor(authInterceptor)
 
-        val logger = HttpLoggingInterceptor()
+        /*val logger = HttpLoggingInterceptor()
         logger.level = HttpLoggingInterceptor.Level.BODY
-        client.addInterceptor(logger)
+        client.addInterceptor(logger)*/
 
         return client.build()
     }
@@ -90,6 +91,12 @@ class MainModule(val context: Context) {
 
     @Singleton
     @Provides
+    fun provideQueryApi(retrofit: Retrofit): IQueryApi {
+        return retrofit.create(IQueryApi::class.java)
+    }
+
+    @Singleton
+    @Provides
     fun provideChannelsApi(client: OkHttpClient): IChannelsApi {
         return ChannelsApi(client)
     }
@@ -105,17 +112,13 @@ class MainModule(val context: Context) {
     @Provides
     fun provideAccountInteractor(sessionStore: SessionStore, accountApi: IAccountApi,
                                  schedulers: RxSchedulers): IAccountInteractor {
-        return AccountInteractor(
-            sessionStore,
-            accountApi,
-            schedulers
-        )
+        return AccountInteractor(sessionStore, accountApi, schedulers)
     }
 
     @Singleton
     @Provides
     fun provideChannelsInteractor(config: Config, channelsApi: IChannelsApi,
-                                  schedulers: RxSchedulers): IChannelsInteractor {
-        return ChannelsInteractor(config, channelsApi, schedulers)
+                                  queryApi: IQueryApi, schedulers: RxSchedulers): IChannelsInteractor {
+        return ChannelsInteractor(config, channelsApi, queryApi, schedulers)
     }
 }

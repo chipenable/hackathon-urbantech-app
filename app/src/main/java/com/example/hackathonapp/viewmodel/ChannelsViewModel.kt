@@ -53,7 +53,7 @@ class ChannelsViewModel(mainComponent: MainComponent) : ViewModel() {
         val channel = channels.value?.get(position)
         channel?.let {
             channelEvent.value = if (it.isFree) {
-                ChannelEvent.ShowChannel()
+                ChannelEvent.ShowChannel(position)
             }
             else{
                 ChannelEvent.SuggestLogin()

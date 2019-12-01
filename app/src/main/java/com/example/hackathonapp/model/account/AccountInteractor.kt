@@ -2,6 +2,7 @@ package com.example.hackathonapp.model.account
 
 import android.util.Log
 import com.example.hackathonapp.data.IAccountApi
+import com.example.hackathonapp.data.IQueryApi
 import com.example.hackathonapp.model.session.SessionStore
 import io.reactivex.Observable
 import ru.chipenable.hackathonvideoapp.model.util.RxSchedulers

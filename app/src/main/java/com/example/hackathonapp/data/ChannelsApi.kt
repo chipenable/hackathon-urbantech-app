@@ -25,9 +25,7 @@ import kotlin.random.Random
 interface IChannelsApi {
 
     fun checkCache(urls: List<String>): Cache
-    fun getPlaylist(cacheId: String? = null): String
     fun getChannels(isAuthorised: Boolean): List<Channel>
-    //fun getChannelStatus(): ChannelStatus
 
 }
 
@@ -85,11 +83,6 @@ class ChannelsApi(private val client: OkHttpClient): IChannelsApi {
         return cache
     }
 
-    override fun getPlaylist(cacheId: String?): String {
-
-        return ""
-    }
-
     //заглушка
     override fun getChannels(isAuthorised: Boolean): List<Channel> {
         val channels = listOf(
@@ -110,7 +103,4 @@ class ChannelsApi(private val client: OkHttpClient): IChannelsApi {
         }
     }
 
-    /*override fun getChannelStatus(): ChannelStatus {
-
-    }*/
 }

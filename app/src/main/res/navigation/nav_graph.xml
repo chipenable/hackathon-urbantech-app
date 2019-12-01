@@ -35,4 +35,9 @@
         android:name="com.example.hackathonapp.ui.fragment.PlayerFragment"
         android:label="player_fragment"
         tools:layout="@layout/player_fragment" />
+    <fragment
+        android:id="@+id/storeFragment"
+        android:name="com.example.hackathonapp.ui.fragment.StoreFragment"
+        android:label="store_fragment"
+        tools:layout="@layout/store_fragment" />
 </navigation>
